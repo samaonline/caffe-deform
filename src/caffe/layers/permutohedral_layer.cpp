@@ -113,7 +113,7 @@ void PermutohedralLayerTemplate<Dtype, Ptype>::Reshape(
     caffe_set(out_data_count, Dtype(1), bias_multiplier_.mutable_cpu_data());
   }
 
-    temp_feat_.Reshape(num_, num_output_, out_height_*out_width_, 1);
+    temp_feat_.Reshape(num_, num_output_, 1, feature_size_);
     //caffe_set(out_data_count, Dtype(1), temp_feat_.mutable_cpu_data());
 
   if (top.size() > 1) {
@@ -474,7 +474,7 @@ void PermutohedralLayerTemplate<Dtype, Ptype>::Backward_cpu(
  //***
 //PW
         const int out_data_count = out_height_ * out_width_;
-        caffe_cpu_gemm<Dtype>(CblasNoTrans, CblasTrans, feature_size_,
+        caffe_cpu_gemm<Dtype>(CblasTrans, CblasNoTrans, feature_size_,
                               out_data_count, num_output_, (Dtype)1.,
                               temp_feat_.cpu_data() + temp_feat_.offset(n),
                               top_diff + top_blob.offset(n),

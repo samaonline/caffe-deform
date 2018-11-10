@@ -306,7 +306,6 @@ void PermutohedralReverseCpu<T>::slice_Ldiff(
     value_type* sliced) const {
   // data           num_output x M_                               row-major
   // sliced         num_output x out_size (d_)                        row-major
-
   for (int i = 0; i < static_cast<int>(d_); i++) {
     for (int k = 0; k < static_cast<int>(num_output_); k++) {
       sliced[k*d_ + i] = 0;
@@ -928,7 +927,7 @@ void Permutohedral<T>::init(
     for (int remainder = 0; remainder <= d; remainder++) {
       for (int i = 0; i <d; i++)
         key_[i] = rem0_[i] + canonical[ remainder*(d+1) + rank[i] ];
-      assert(k*(d+1)+remainder < (d+1) * N);
+      assert(k*(d+1)+remainder < (d+1) * d);
       lattice->offset_Ldiff_[k*(d+1)+remainder] = hash_table.find(key_.data(),
                                                               true);
       lattice->barycentric_Ldiff_[k*(d+1)+remainder] = barycentric2[remainder];

@@ -174,11 +174,11 @@ void PermutohedralLayerTemplate<Dtype, Ptype>::Backward_gpu(
     //***
 //PW
         const int out_data_count = out_height_ * out_width_;
-        caffe_gpu_gemm<Dtype>(CblasNoTrans, CblasTrans, feature_size_,
+        caffe_gpu_gemm<Dtype>(CblasTrans, CblasNoTrans, feature_size_,
                               out_data_count, num_output_, (Dtype)1.,
                               temp_feat_.gpu_data() + temp_feat_.offset(n),
                               top_diff + top_blob.offset(n),
-                              (Dtype)0., bottom_feat_diff + bottom_feat_blob.offset(n));      
+                              (Dtype)0., bottom_feat_diff + bottom_feat_blob.offset(n));       
       
 //End
 //***
