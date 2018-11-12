@@ -371,7 +371,7 @@ void PermutohedralLayerTemplate<Dtype, Ptype>::Forward_cpu(
           top_data + top_blob.offset(n));
     //**
     // PW
-      op.reverse_->compute_Ldiff(scaled_there_data, temp_feat_.mutable_cpu_data());
+      op.reverse_->compute_Ldiff(scaled_there_data, temp_feat_.mutable_cpu_data()+ temp_feat_.offset(n));
           
     //End     
     //***

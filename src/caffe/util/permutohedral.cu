@@ -47,8 +47,8 @@ PermutohedralReverseGpu<T>::init(
 
 //***
 //PW
-  barycentric_Ldiff_.Reshape(1, 1, N_, d_ + 1);
-  assert(lattice->barycentric_Ldiff_.size() == N_ * (d_ + 1));
+  barycentric_Ldiff_.Reshape(1, 1, d_, d_ + 1);
+  assert(lattice->barycentric_Ldiff_.size() == d_ * (d_ + 1));
   std::copy(lattice->barycentric_Ldiff_.begin(), lattice->barycentric_Ldiff_.end(),
             barycentric_Ldiff_.mutable_cpu_data());
 //End
@@ -223,7 +223,7 @@ void PermutohedralReverseGpu<T>::slice_Ldiff(
     <<<CAFFE_GET_BLOCKS(d_), CAFFE_CUDA_NUM_THREADS>>>
     (d_, data.gpu_data(),
     M_, d_,
-    0,
+    d_,
     num_output_,
     offset_Ldiff_.gpu_data(), barycentric_Ldiff_.gpu_data(),
     sliced);

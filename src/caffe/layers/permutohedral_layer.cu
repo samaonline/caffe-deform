@@ -78,7 +78,7 @@ void PermutohedralLayerTemplate<Dtype, Ptype>::Forward_gpu(
     //***
     //PW
     
-    op.reverse_->compute_Ldiff(scaled_there_data, temp_feat_.mutable_gpu_data());
+    op.reverse_->compute_Ldiff(scaled_there_data, temp_feat_.mutable_gpu_data()+  temp_feat_.offset(n));
     
     //End
     //***
